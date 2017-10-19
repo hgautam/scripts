@@ -7,7 +7,7 @@ my @errorIps = ();
 open (MYFILE, 'sortedIps.txt');
 while (<MYFILE>) {
 	chomp;
-	system("ping -n 1 $_");
+	system("ping -c 1 $_");
 	my $statusCode = `echo $?`;
 	if ($statusCode != 0) {
 	   push(@errorIps, $_)
