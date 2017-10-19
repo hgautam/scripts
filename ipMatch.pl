@@ -14,7 +14,7 @@ while(<MYFILE>) {
 	chomp;
     # match an ip in format of 10.254.10.55 as multiple ips in one line
 	while ($_ =~ /(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/g) {
-		print "$1\n";
+		#print "$1\n";
 		print $fh "$1\n";
 	}
 }
