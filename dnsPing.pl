@@ -16,7 +16,7 @@ while (<MYFILE>) {
 close (MYFILE);
 if (scalar @errorIps > 0) {
     print "Following Nameserver(s) not responding:\n";
-	print "ERR_MSG=@errorIps not responding\n";
+	print "ERR_MSG=@errorIps not responding!!!";
 	exit 1;
 } else {
 	exit 0;
