@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 #download AppToDNSMapping.md from GH
-system("curl -O --user \"hgautam:bb89121c2764b1af51c819f0a21a7f3207ccecde\" -H \"Accept: application/vnd.github.v4.raw\" https://github.corp.ebay.com/api/v3/repos/SCM/docs/contents/AppToDNSMapping.md");
+system("curl -s -O --user \"hgautam:bb89121c2764b1af51c819f0a21a7f3207ccecde\" -H \"Accept: application/vnd.github.v4.raw\" https://github.corp.ebay.com/api/v3/repos/SCM/docs/contents/AppToDNSMapping.md");
 
 # Reads IPs from AppToDNSMapping.md file
 open(MYFILE, 'AppToDNSMapping.md');
