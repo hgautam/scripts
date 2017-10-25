@@ -7,7 +7,7 @@ my @errorIps = ();
 open (MYFILE, 'sortedIps.txt');
 while (<MYFILE>) {
 	chomp;
-	system("ping -n 1 $_");
+	system("ping -c 1 $_");
 	my $statusCode = `echo $?`;
 	if ($statusCode != 0) {
 	   push(@errorIps, $_)
@@ -16,8 +16,8 @@ while (<MYFILE>) {
 close (MYFILE);
 if (scalar @errorIps > 0) {
     print "Following Nameserver(s) not responding:\n";
-	print "@errorIps\n";
-	exit 1;
+	print "ERR_MSG=@errorIps not responding\n";
+	#exit 1;
 } else {
 	exit 0;
 }
