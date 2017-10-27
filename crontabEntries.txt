@@ -1,0 +1,4 @@
+On secondary host:
+*/7 * * * * . /etc/profile; /usr/bin/perl /ebay/scripts/newMon.pl
+On primary host:
+*/4 * * * * . /etc/profile; /usr/bin/perl /ebay/scripts/newMon.pl
