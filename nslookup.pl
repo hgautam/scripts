@@ -14,8 +14,10 @@ my @corpServers = ("atom.corp.ebay.com", "ebaycentral.corp.ebay.com", "npm.corp.
 #my @qaErrors = queryDNS(\@qaDNSList, \@qaServers);
 my @corpErrors = queryDNS(\@corpDNSList, \@corpServers);
 
-if (scalar @qaErrors > 0 || scalar @corpErrors > 0) {
-    print "@qaErrors @corpErrors";
+#if (scalar @qaErrors > 0 || scalar @corpErrors > 0) {
+if (scalar @corpErrors > 0) {
+    #print "@qaErrors @corpErrors";
+    print "@corpErrors";
     exit 1;
 }
 
