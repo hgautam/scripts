@@ -7,11 +7,11 @@ my @qaDNSList = ("10.108.139.154", "10.109.104.20", "10.109.104.21");
 my @corpDNSList = ("10.254.58.54", "10.254.58.55");
 
 # list of qa and corp servers to be queried against DNS servers
-my @qaServers = ("qa-proxy.qa.ebay.com", "mailhost.qa.ebay.com", "ebaycentral.qa.ebay.com");
-my @corpServers = ("atom.corp.ebay.com", "ebaycentral.corp.ebay.com");
+#my @qaServers = ("qa-proxy.qa.ebay.com", "mailhost.qa.ebay.com", "ebaycentral.qa.ebay.com");
+my @corpServers = ("atom.corp.ebay.com", "ebaycentral.corp.ebay.com", "npm.corp.ebay.com");
 
 # collect dns query errors
-my @qaErrors = queryDNS(\@qaDNSList, \@qaServers);
+#my @qaErrors = queryDNS(\@qaDNSList, \@qaServers);
 my @corpErrors = queryDNS(\@corpDNSList, \@corpServers);
 
 if (scalar @qaErrors > 0 || scalar @corpErrors > 0) {
