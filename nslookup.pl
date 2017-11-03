@@ -28,7 +28,7 @@ sub queryDNS{
     my @errorList = ();
     foreach my $dns (@nameServers) {
         foreach my $server (@testServers) {
-            my $statusCode = system("nslookup $server $dns");
+            my $statusCode = system("nslookup -query=a -timeout=10 $server $dns");
             if ($statusCode != 0) {
                 print "$statusCode\n";
                 print "DNS server $dns is not responding to a query";
