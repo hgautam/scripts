@@ -7,15 +7,17 @@ my @qaDNSList = ("10.108.139.154", "10.109.104.20", "10.109.104.21");
 my @corpDNSList = ("10.254.58.54", "10.254.58.55");
 
 # list of qa and corp servers to be queried against DNS servers
-my @qaServers = ("qa-proxy.qa.ebay.com", "mailhost.qa.ebay.com", "ebaycentral.qa.ebay.com");
-my @corpServers = ("atom.corp.ebay.com", "ebaycentral.corp.ebay.com");
+#my @qaServers = ("qa-proxy.qa.ebay.com", "mailhost.qa.ebay.com", "ebaycentral.qa.ebay.com");
+my @corpServers = ("atom.corp.ebay.com", "ebaycentral.corp.ebay.com", "npm.corp.ebay.com");
 
 # collect dns query errors
-my @qaErrors = queryDNS(\@qaDNSList, \@qaServers);
+#my @qaErrors = queryDNS(\@qaDNSList, \@qaServers);
 my @corpErrors = queryDNS(\@corpDNSList, \@corpServers);
 
-if (scalar @qaErrors > 0 || scalar @corpErrors > 0) {
-    print "@qaErrors @corpErrors";
+#if (scalar @qaErrors > 0 || scalar @corpErrors > 0) {
+if (scalar @corpErrors > 0) {
+    #print "@qaErrors @corpErrors";
+    print "@corpErrors";
     exit 1;
 }
 
@@ -26,7 +28,9 @@ sub queryDNS{
     my @errorList = ();
     foreach my $dns (@nameServers) {
         foreach my $server (@testServers) {
-            my $statusCode = system("nslookup $server $dns");
+            print "******\n";
+            my $statusCode = system("nslookup -query=a -timeout=10 $server $dns");
+            print "******\n";
             if ($statusCode != 0) {
                 print "$statusCode\n";
                 print "DNS server $dns is not responding to a query";
