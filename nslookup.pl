@@ -33,7 +33,7 @@ sub queryDNS{
             print "******\n";
             if ($statusCode != 0) {
                 print "$statusCode\n";
-                print "DNS server $dns is not responding to a query";
+                print "DNS server $dns is not responding to a query\n";
                 push(@errorList, $dns);
             } #else {
             #     push(@errorList, $dns);
