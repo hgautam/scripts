@@ -29,7 +29,7 @@ sub queryDNS{
     foreach my $dns (@nameServers) {
         foreach my $server (@testServers) {
             print "******\n";
-            my $statusCode = system("nslookup -query=a -timeout=10 $server $dns");
+            my $statusCode = system("nslookup -query=a -timeout=5 $server $dns");
             print "******\n";
             if ($statusCode != 0) {
                 print "$statusCode\n";
