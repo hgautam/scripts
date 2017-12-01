@@ -17,7 +17,7 @@ my @corpErrors = queryDNS(\@corpDNSList, \@corpServers);
 #if (scalar @qaErrors > 0 || scalar @corpErrors > 0) {
 if (scalar @corpErrors > 0) {
     #print "@qaErrors @corpErrors";
-    print "@corpErrors\n";
+    print "Failed DNS server(s): @corpErrors\n";
     exit 1;
 }
 
