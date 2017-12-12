@@ -16,8 +16,14 @@ my @corpErrors = queryDNS(\@corpDNSList, \@corpServers);
 
 #if (scalar @qaErrors > 0 || scalar @corpErrors > 0) {
 if (scalar @corpErrors > 0) {
-    #print "@qaErrors @corpErrors";
-    print "Failed DNS server(s): @corpErrors\n";
+    # Remove dupliates from @corpErrors
+    my %hash   = map { $_ => 1 } @corpErrors;
+    my @unique = keys %hash;
+    foreach my $failedLookup (@unique) {
+        print "Failed DNS server(s): $failedLookup\n";
+        #system("/usr/bin/python /cygdrive/c/cygwin64/home/hgautam/monitoring/scripts/slackApiPost.py $failedLookup");
+        system("/usr/bin/python slackApiPost.py $failedLookup");
+    }
     exit 1;
 }
 
@@ -29,15 +35,24 @@ sub queryDNS{
     foreach my $dns (@nameServers) {
         foreach my $server (@testServers) {
             print "******\n";
-            my $statusCode = system("nslookup -query=a -timeout=1 $server $dns");
-            print "******\n";
+            #my $statusCode = system("nslookup -query=a -timeout=1 $server $dns");
+            my $output = `nslookup -query=a -timeout=1 $server $dns`;
+            my $statusCode = $?>>8;
+            #print "******\n";
             if ($statusCode != 0) {
-                #print "$statusCode\n";
+                print "$statusCode\n";
                 print "DNS server $dns is not responding to a query\n";
                 push(@errorList, $dns);
-            } #else {
-            #     push(@errorList, $dns);
-            # }
+            } else {
+                if ($output =~ /DNS request timed out/) {
+                    print "$dns timed out\n";
+                    push(@errorList, $dns);
+                }
+                if ($output =~ /connection timed out/) {
+                    print "$dns timed out\n";
+                    push(@errorList, $dns);
+                }
+            }
         }
     }
     return @errorList;
