@@ -17,7 +17,7 @@ my @corpErrors = queryDNS(\@corpDNSList, \@corpServers);
 #if (scalar @qaErrors > 0 || scalar @corpErrors > 0) {
 if (scalar @corpErrors > 0) {
     #print "@qaErrors @corpErrors";
-    print "@corpErrors";
+    print "Failed DNS server(s): @corpErrors\n";
     exit 1;
 }
 
@@ -29,11 +29,11 @@ sub queryDNS{
     foreach my $dns (@nameServers) {
         foreach my $server (@testServers) {
             print "******\n";
-            my $statusCode = system("nslookup -query=a -timeout=10 $server $dns");
+            my $statusCode = system("nslookup -query=a -timeout=1 $server $dns");
             print "******\n";
             if ($statusCode != 0) {
-                print "$statusCode\n";
-                print "DNS server $dns is not responding to a query";
+                #print "$statusCode\n";
+                print "DNS server $dns is not responding to a query\n";
                 push(@errorList, $dns);
             } #else {
             #     push(@errorList, $dns);
