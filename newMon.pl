@@ -2,8 +2,8 @@
 use strict;
 use warnings;
 
-my $hostName="phx5qa01c-316b.stratus.phx.qa.ebay.com";
-my $defaultBackup="phx5qa01c-8072.stratus.phx.qa.ebay.com";
+my $hostName="phx5qa01c-5zsx.stratus.phx.qa.ebay.com";
+my $defaultBackup="phx5qa01c-9hxr.stratus.phx.qa.ebay.com";
 my $logFile='/ebay/scripts/logs/newMon.log';
 my $startCommand="service nexus start";
 my $stopCommand="service nexus stop";
