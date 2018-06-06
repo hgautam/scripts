@@ -2,11 +2,11 @@
 use strict;
 use warnings;
 
-my $hostName="phx5qa01c-5zsx.stratus.phx.qa.ebay.com";
-my $defaultBackup="phx5qa01c-9hxr.stratus.phx.qa.ebay.com";
+my $hostName="MASTER HOST NAME";
+my $defaultBackup="SECONDARY HOST NAME";
 my $logFile='/ebay/scripts/logs/newMon.log';
-my $startCommand="service nexus start";
-my $stopCommand="service nexus stop";
+my $startCommand="/ebay/pkgs/nexusPro/nexus/bin/nexus start";
+my $stopCommand="/ebay/pkgs/nexusPro/nexus/bin/nexus stop";
 my $appURL = "http://$hostName";
 my $remoteAppURL = "http://$defaultBackup";
 my $logString = "**********\n";
