@@ -80,6 +80,8 @@ if ($appStatus != 0) {
         if ($remoteAppStatus !=0) {
            $logString = $logString."$defaultBackup Nexus web app is still DOWN after second retry!\n";
            $logString = $logString."Starting Nexus app on $hostName...\n";
+           my $stopCommandStatus = `$stopCommand`;
+           $logString = $logString.$stopCommandStatus."\n";
            my $commandStatus = `$startCommand`;
            $logString = $logString.$commandStatus."\n";
            #exit 0;
